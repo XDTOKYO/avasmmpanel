@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-  (function() {
-    // URL check kar raha hai ke usme '?access=true' likha hai ya nahi
-    const urlParams = new URLSearchParams(window.location.search);
-    const hasAccess = urlParams.get('access');
-
-    // Agar link mein 'access=true' nahi hai, toh matlab wo bot ya direct banda hai
-    if (hasAccess !== 'true') {
-        // Scanners aur bots ko Google par phenk do
-        window.location.href = "https://www.google.com";
-    }
-    
-    // Agar koi google bot referrer ke sath aaye tab bhi block kardo (Extra Safety)
-    var ref = document.referrer.toLowerCase();
-    if (ref.includes("google") || ref.includes("bot") || ref.includes("bing")) {
-        window.location.href = "https://www.google.com";
-    }
-  })();
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AVA Panel — Premium SMM Services</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script>
         tailwind.config = {
             theme: {
                 extend: {
@@ -1535,3 +1510,4 @@
     </script>
 </body>
 </html>
+
